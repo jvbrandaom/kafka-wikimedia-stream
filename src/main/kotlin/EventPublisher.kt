@@ -20,6 +20,9 @@ class EventPublisher<K, V>(
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer)
         properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer::class.qualifiedName)
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, messageSerializer::class.qualifiedName)
+        properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20")
+        properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, (32 * 1024).toString())
+        properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy")
         producer = KafkaProducer<K, V>(properties)
     }
 
